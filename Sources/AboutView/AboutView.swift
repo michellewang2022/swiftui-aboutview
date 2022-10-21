@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 @available(iOS 14, *)
-struct AboutView: View {
+public struct AboutView: View {
     @State var appIcon: UIImage = UIImage(systemName: "app")!
     @State var appName: String  = "My App"
     @State var appVersion: String = "v1.0 build 20"
