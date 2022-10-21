@@ -10,20 +10,18 @@ import UIKit
 
 @available(iOS 14, *)
 public struct AboutView: View {
-    @State var appIcon: UIImage = UIImage(systemName: "app")!
-    @State var appName: String  = "My App"
-    @State var appVersion: String = "v1.0 build 20"
-    @State var isDeveloperMode: Bool = false
-    @State var licenseText: String = ""
-    @State var privacyText: String = ""
-    @State var opensourceText: String = ""
-    @State var acknowledgementsText: String = ""
+    @State var appIcon: UIImage
+    @State var appName: String
+    @State var appVersion: String
+    @State var isDeveloperMode: Bool
+    @State var licenseText: String
+    @State var privacyText: String
+    @State var opensourceText: String
+    @State var acknowledgementsText: String
     
-    @State var onDeveloperModeChanged: (Bool) -> Void = { isDeveloper in
-        print("default onDeveloperModeChanged called with \(isDeveloper)")
-    }
+    @State var onDeveloperModeChanged: (Bool) -> Void 
     
-    public init(appName: String, appIcon: UIImage, appVersion: String , isDeveloperMode: Bool, licenseText: String, privacyText: String, opensourceText: String, acknowledgementsText:String) {
+    public init(appName: String, appIcon: UIImage, appVersion: String , isDeveloperMode: Bool, licenseText: String, privacyText: String, opensourceText: String, acknowledgementsText:String, onDeveloperModeChanged: @escaping  (Bool) -> Void) {
         
         _appName = State(initialValue: appName)
         _appIcon = State(initialValue: appIcon)
@@ -33,6 +31,7 @@ public struct AboutView: View {
         _privacyText = State(initialValue: privacyText)
         _opensourceText = State(initialValue: opensourceText)
         _acknowledgementsText = State(initialValue: acknowledgementsText)
+        _onDeveloperModeChanged = State(initialValue: onDeveloperModeChanged)
     }
     
     public var body: some View {
