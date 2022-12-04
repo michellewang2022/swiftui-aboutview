@@ -35,51 +35,52 @@ public struct AboutView: View {
     }
     
     public var body: some View {
-        NavigationView {
-            VStack {
+    
+        VStack {
+        
+            // Product name & Icon
+            Image(uiImage: appIcon)
+                .resizable()
+                .frame(width:50,height:50)
             
-                // Product name & Icon
-                Image(uiImage: appIcon)
-                    .resizable()
-                    .frame(width:50,height:50)
-                
-                Text(appName).fontWeight(.black)
-                
-                // Version & Build number
-                Text(appVersion)
-                
-                List {
-                    // License agreement
-                    // Privacy agreement
-                    // Open source packages
-                    // 3rd Party Notices
-                    
-                    if licenseText != "" {
-                        NavigationLink(destination: ScrollView { Text(licenseText) }, label: { Text("License Agreement")} )
-                    }
-                    if privacyText != "" {
-                        NavigationLink(destination: ScrollView { Text(privacyText) }, label: { Text("Privacy Agreement")} )
-                    }
-                    if opensourceText != "" {
-                        NavigationLink(destination: ScrollView { Text(opensourceText) }, label: { Text("Open Source")} )
-                    }
-                    if acknowledgementsText != "" {
-                        NavigationLink(destination: ScrollView { Text(acknowledgementsText) }, label: { Text("Acknowledgements")} )
-                    }
-                    
+            Text(appName).fontWeight(.black)
             
+            // Version & Build number
+            Text(appVersion)
+            
+            List {
+                // License agreement
+                // Privacy agreement
+                // Open source packages
+                // 3rd Party Notices
+                
+                if licenseText != "" {
+                    NavigationLink(destination: ScrollView { Text(licenseText) }, label: { Text("License Agreement")} )
                 }
-                 
-                // Developer Mode
-                Toggle(isOn: $isDeveloperMode) {
-                    Text("Developer Mode")
-                }.padding()
-                    
-                Spacer()
-            }.navigationTitle("About")
-                .navigationBarTitleDisplayMode(.inline)
+                if privacyText != "" {
+                    NavigationLink(destination: ScrollView { Text(privacyText) }, label: { Text("Privacy Agreement")} )
+                }
+                if opensourceText != "" {
+                    NavigationLink(destination: ScrollView { Text(opensourceText) }, label: { Text("Open Source")} )
+                }
+                if acknowledgementsText != "" {
+                    NavigationLink(destination: ScrollView { Text(acknowledgementsText) }, label: { Text("Acknowledgements")} )
+                }
+                
+        
+            }
+             
+            // Developer Mode
+            Toggle(isOn: $isDeveloperMode) {
+                Text("Developer Mode")
+            }.padding()
+                
+            Spacer()
         }.onChange(of: isDeveloperMode, perform: { newvalue in
             onDeveloperModeChanged(newvalue)
         })
+        .navigationTitle("About")
+        .navigationBarTitleDisplayMode(.inline)
+    
     }
 }
