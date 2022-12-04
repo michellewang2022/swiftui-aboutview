@@ -19,40 +19,40 @@ public struct FeedbackSelectionView: View {
     
     public var body: some View {
         
-        NavigationView {
-            List {
-                NavigationLink(destination:
-                    FeedbackView(feedback: .Positive, onSendFeedback: { description, email, attachments in
-                    onSendFeedback(.Positive, description, email, attachments)
-                }), label: {
-                    HStack {
-                        Image(systemName: "hand.thumbsup")
-                        Text("Something I Like")
-                    }
-                })
-                
-                NavigationLink(destination:
-                    FeedbackView(feedback: .Negative, onSendFeedback: {  description, email, attachments in
-                    onSendFeedback(.Negative, description, email, attachments)
-                }), label: {
-                    HStack {
-                        Image(systemName: "hand.thumbsdown")
-                        Text("Something I don't Like")
-                    }
-                })
-                
-                NavigationLink(destination:
-                    FeedbackView(feedback: .Suggestion, onSendFeedback: { description, email, attachments in
-                    onSendFeedback(.Suggestion, description, email, attachments)
-                }), label: {
-                    HStack {
-                        Image(systemName: "face.smiling")
-                        Text("Recommend a feature")
-                    }
-                })
-        
-            }.navigationTitle("Give Feedback")
-                .navigationBarTitleDisplayMode(.inline)
-        }
+       
+        List {
+            NavigationLink(destination:
+                FeedbackView(feedback: .Positive, onSendFeedback: { description, email, attachments in
+                onSendFeedback(.Positive, description, email, attachments)
+            }), label: {
+                HStack {
+                    Image(systemName: "hand.thumbsup")
+                    Text("Something I Like")
+                }
+            })
+            
+            NavigationLink(destination:
+                FeedbackView(feedback: .Negative, onSendFeedback: {  description, email, attachments in
+                onSendFeedback(.Negative, description, email, attachments)
+            }), label: {
+                HStack {
+                    Image(systemName: "hand.thumbsdown")
+                    Text("Something I don't Like")
+                }
+            })
+            
+            NavigationLink(destination:
+                FeedbackView(feedback: .Suggestion, onSendFeedback: { description, email, attachments in
+                onSendFeedback(.Suggestion, description, email, attachments)
+            }), label: {
+                HStack {
+                    Image(systemName: "face.smiling")
+                    Text("Recommend a feature")
+                }
+            })
+    
+        }.navigationTitle("Give Feedback")
+            .navigationBarTitleDisplayMode(.inline)
+    
     }
 }
