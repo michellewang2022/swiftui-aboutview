@@ -41,7 +41,7 @@ public struct AboutView: View {
             // Product name & Icon
             Image(uiImage: appIcon)
                 .resizable()
-                .frame(width:50,height:50)
+                .frame(width:50,height:50).padding(.top)
             
             Text(appName).fontWeight(.black)
             
