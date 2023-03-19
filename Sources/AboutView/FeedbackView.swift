@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-@available(iOS 14, *)
+@available(iOS 16, *)
 public enum FeedbackType {
     case Positive
     case Negative
     case Suggestion
 }
 
-@available(iOS 14, *)
+@available(iOS 16, *)
 public struct FeedbackView: View {
     @State var feedback: FeedbackType
     @State var description: String = ""

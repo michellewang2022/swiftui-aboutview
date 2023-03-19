@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 14, *)
+@available(iOS 16, *)
 public struct FeedbackSelectionView: View {
     @State var onSendFeedback: (FeedbackType, String, String, [URL])->Void = { feedback, description, email, attachments in
         print("FeedbackSelectionView.onSendFeedback() called with no implementation")

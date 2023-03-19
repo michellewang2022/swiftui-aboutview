@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-@available(iOS 14, *)
+@available(iOS 16, *)
 public struct AboutView: View {
     @State var appIcon: UIImage
     @State var appName: String
@@ -19,9 +19,10 @@ public struct AboutView: View {
     @State var opensourceText: String
     @State var acknowledgementsText: String
     
-    @State var onDeveloperModeChanged: (Bool) -> Void 
+    @State var onDeveloperModeChanged: (Bool) -> Void
+    @Binding var isPortrait:Bool
     
-    public init(appName: String, appIcon: UIImage, appVersion: String , isDeveloperMode: Bool, licenseText: String, privacyText: String, opensourceText: String, acknowledgementsText:String, onDeveloperModeChanged: @escaping  (Bool) -> Void) {
+    public init(isPortrait: Binding<Bool>, appName: String, appIcon: UIImage, appVersion: String , isDeveloperMode: Bool, licenseText: String, privacyText: String, opensourceText: String, acknowledgementsText:String, onDeveloperModeChanged: @escaping  (Bool) -> Void) {
         
         _appName = State(initialValue: appName)
         _appIcon = State(initialValue: appIcon)
@@ -32,42 +33,58 @@ public struct AboutView: View {
         _opensourceText = State(initialValue: opensourceText)
         _acknowledgementsText = State(initialValue: acknowledgementsText)
         _onDeveloperModeChanged = State(initialValue: onDeveloperModeChanged)
+        _isPortrait = isPortrait
     }
     
     public var body: some View {
     
         VStack {
         
-            // Product name & Icon
-            Image(uiImage: appIcon)
-                .resizable()
-                .frame(width:50,height:50).padding(.top)
-            
-            Text(appName).fontWeight(.black)
-            
-            // Version & Build number
-            Text(appVersion)
-            
-            List {
-                // License agreement
-                // Privacy agreement
-                // Open source packages
-                // 3rd Party Notices
+            if isPortrait {
+                // Product name & Icon
+                Image(uiImage: appIcon)
+                    .resizable()
+                    .frame(width:50,height:50).padding(.top)
                 
-                if licenseText != "" {
-                    NavigationLink(destination: ScrollView { Text(licenseText) }, label: { Text("License Agreement")} )
-                }
-                if privacyText != "" {
-                    NavigationLink(destination: ScrollView { Text(privacyText) }, label: { Text("Privacy Agreement")} )
-                }
-                if opensourceText != "" {
-                    NavigationLink(destination: ScrollView { Text(opensourceText) }, label: { Text("Open Source")} )
-                }
-                if acknowledgementsText != "" {
-                    NavigationLink(destination: ScrollView { Text(acknowledgementsText) }, label: { Text("Acknowledgements")} )
-                }
+                Text(appName).fontWeight(.black)
                 
-        
+                // Version & Build number
+                Text(appVersion)
+            }
+            
+            HStack {
+                if !isPortrait {
+                    // Product name & Icon
+                    Image(uiImage: appIcon)
+                        .resizable()
+                        .frame(width:50,height:50).padding(.top)
+                    
+                    Text(appName).fontWeight(.black)
+                    
+                    // Version & Build number
+                    Text(appVersion)
+                }
+                List {
+                    // License agreement
+                    // Privacy agreement
+                    // Open source packages
+                    // 3rd Party Notices
+                    
+                    if licenseText != "" {
+                        NavigationLink(destination: ScrollView { Text(licenseText) }, label: { Text("License Agreement")} )
+                    }
+                    if privacyText != "" {
+                        NavigationLink(destination: ScrollView { Text(privacyText) }, label: { Text("Privacy Agreement")} )
+                    }
+                    if opensourceText != "" {
+                        NavigationLink(destination: ScrollView { Text(opensourceText) }, label: { Text("Open Source")} )
+                    }
+                    if acknowledgementsText != "" {
+                        NavigationLink(destination: ScrollView { Text(acknowledgementsText) }, label: { Text("Acknowledgements")} )
+                    }
+                    
+                    
+                }
             }
              
             // Developer Mode
@@ -76,11 +93,14 @@ public struct AboutView: View {
             }.padding()
                 
             Spacer()
-        }.onChange(of: isDeveloperMode, perform: { newvalue in
+        }
+        
+        .onChange(of: isDeveloperMode, perform: { newvalue in
             onDeveloperModeChanged(newvalue)
         })
+        
         .navigationTitle("About")
         .navigationBarTitleDisplayMode(.inline)
-    
+        
     }
 }
